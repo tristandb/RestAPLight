@@ -1,0 +1,59 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.css"/>
+    <title>Lamp</title>
+    <style>
+        .fa-power-off{
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <button class="action expand success" lampaction="52514"><i class="fa fa-power-off"></i>Stalamp</button>
+    <button class="action expand success" lampaction="56888"><i class="fa fa-power-off"></i>Stereo</button>
+    <button class="action expand success" lampaction="53972"><i class="fa fa-power-off"></i>Spiegel</button>
+</div>
+    <script>
+        function turnLamp (id, state){
+            var success = false;
+            $.ajax({
+                url: 'http://192.168.0.105/' + id + '/' + state,
+                success: function(result){
+                    success = true;
+                }
+            });
+            return success;
+        }
+        $('.action').click(function(){
+            if($(this).attr('lampaction') > 50){
+                if($(this).hasClass("success")){
+                    turnLamp($(this).attr('lampaction') - 2, 'HIGH');
+                    $(this).removeClass("success");
+                    $(this).addClass("alert");
+
+                }else{
+                   turnLamp($(this).attr('lampaction'), 'HIGH');
+                   $(this).addClass("success");
+                   $(this).removeClass("alert");
+                }
+            }else{
+                if($(this).hasClass("success")){
+                    turnLamp($(this).attr('lampaction'), 'LOW');
+                    $(this).removeClass("success");
+                    $(this).addClass("alert");
+
+                }else{
+                    turnLamp($(this).attr('lampaction'), 'HIGH');
+                    $(this).addClass("success");
+                    $(this).removeClass("alert");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
