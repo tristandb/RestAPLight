@@ -25,7 +25,9 @@ Lights can be controlled by opening lamp.html. Please note to specify the correc
 
 ## Adding custom lights (433Mhz)
 Discover lamps by uploading ShowReceivedCode to your Arduino. Open the serial and send a 433Mhz signal by pressing the on-button of your remote. You'll get a number. Put that number `{discovered_id}` (like 52514) in lamp.html like this:
+
     <button class="action expand success" lampaction="{discovered_id}"><i class="fa fa-power-off"></i>Name</button>
+    
 You're now set to go. Upload restapi to your Arduino and test the setup by opening lamp.html! Please note to specify the correct IP-address and gateway.
 
 ## Adding power (Arduino pins)
